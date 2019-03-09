@@ -112,7 +112,7 @@ angular.module('MyApp')
                             },
                             styles: {
                                 fontSize: 12,
-                                columnWidth: 'wrap',
+                                columnWidth: 'wrap'
                             }
                         })
                         //doc.text(35, 95, "LICENCIA EN TRAMITE: ");
@@ -313,6 +313,7 @@ angular.module('MyApp')
 
         $scope.generarpdf3 = function() {
                 var rows = [];
+                var rows3 = [];
                 var datos = $scope.datos3;
                 var doc = new jsPDF('p', 'pt');
                 img.src = '../logoinst.jpg';
@@ -323,7 +324,7 @@ angular.module('MyApp')
                 //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
                 doc.setFont("helvetica");
                 doc.setFontType("bold");
-                doc.setFontSize(10);
+                doc.setFontSize(8);
                 doc.text(240, 65, "Nº EXPEDIENTE: ");
                 doc.text(323, 65, $scope.expediente);
                 doc.setFontSize(16);
@@ -818,6 +819,358 @@ angular.module('MyApp')
                     }
                 });*/
             doc.save('reporte4.pdf');
+        }
+
+
+        $scope.datos5 = [
+            { "nro": 1, "param": "Encendido de Vehículo:", op1: " ", op2: " ", op3: "x" },
+            { "nro": 2, "param": "Uso de Pedales de Inicio de Conducción:", op1: "x", op2: " ", op3: " " },
+            { "nro": 3, "param": "Conducción en Ruta Determinada y Control de Velocidad:", op1: "x", op2: " ", op3: " " },
+            { "nro": 4, "param": "Cambios de Velocidad 1ra, 2da, 3ra, 4ta, 5ta:", op1: "x", op2: " ", op3: " " },
+            { "nro": 5, "param": "Marcha atrás y Maniobras: ", op1: "x", op2: " ", op3: " " },
+            { "nro": 6, "param": "Respeta las Señales de Transito, Semáforos, Señales en la Vía", op1: "x", op2: " ", op3: " " },
+            { "nro": 7, "param": "Uso de Dirección: ", op1: "x", op2: " ", op3: " " },
+            { "nro": 8, "param": "Viraje a la Derecha, Izquierda, en U con Precaución:", op1: "x", op2: " ", op3: " " },
+            { "nro": 9, "param": "Estacionamiento con Señalización: ", op1: "x", op2: " ", op3: " " },
+            { "nro": 10, "param": "Estacionamiento en Paralelo:", op1: "x", op2: " ", op3: " " },
+            { "nro": 11, "param": "Estacionamiento en Diagonal", op1: "x", op2: " ", op3: " " },
+            { "nro": 12, "param": "Mantiene su Derecha:", op1: "x", op2: " ", op3: " " },
+            { "nro": 13, "param": "Cruce de Vías y Adelantamiento:", op1: "x", op2: " ", op3: " " },
+            { "nro": 14, "param": "Salida y baja de Pendientes:", op1: "x", op2: " ", op3: " " },
+            { "nro": 15, "param": "Utilización Adecuada de Bocina:", op1: "x", op2: " ", op3: " " },
+            { "nro": 16, "param": "Señales de Brazo:", op1: "x", op2: " ", op3: " " },
+            { "nro": 17, "param": "Distancia Segura de Seguimiento:", op1: "x", op2: " ", op3: " " },
+            { "nro": 18, "param": "Derecho de Paso", op1: "x", op2: " ", op3: " " },
+            { "nro": 19, "param": "Actitud de Manejo:", op1: "x", op2: " ", op3: " " },
+            { "nro": 20, "param": "Observación en Ángulos Muertos:", op1: "x", op2: " ", op3: " " },
+        ]
+
+        $scope.datos6 = [
+            { evaluacion: "A:MB", tipoexamen: "HABILIDAD PARA CONDUCIR", resultado: "" },
+            { evaluacion: "B:B", tipoexamen: "HABILIDAD PARA ESTACIONAR", resultado: "" },
+            { evaluacion: "C:R", tipoexamen: "APLICACION DE REGLAMENTO", resultado: "" }
+        ];
+
+
+        $scope.generarpdf5 = function() {
+            var rows = [];
+            var rows1 = [];
+            var rows3 = [];
+            var datos = $scope.datos5;
+            var datos1 = [];
+            var datos2 = $scope.datos6;
+            var doc = new jsPDF('p', 'pt');
+            img.src = '../logoinst.jpg';
+            img2.src = '../mtc.png';
+            doc.addImage(img2.onload(), 'JPEG', 35, 10, 200, 40);
+            doc.addImage(img.onload(), 'JPEG', 360, 10, 200, 40);
+            //doc.setFont("courier", "normal");
+            //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
+            doc.setFont("helvetica");
+            doc.setFontType("bold");
+            doc.setFontSize(10);
+            doc.text(220, 65, "FICHA TECNICA DEL ALUMNO");
+            doc.setFontSize(16);
+            doc.text(140, 80, "EVALUACION DE PRACTICA DE MANEJO")
+            doc.setFontSize(10);
+            doc.setFillColor(41, 128, 186);
+            //doc.setTextColor(255, 0, 0);
+            //doc.text(35, 400, "NOMBRES Y APELLIDOS: ");
+
+            var colnom = [
+                { title: 'NOMBRES Y APELLIDOS ', dataKey: "nombre" }
+            ]
+            var coldoc = [
+                { title: 'INSTRUCTOR', dataKey: "inst" }
+            ]
+            var colfechai = [
+                { title: 'FECHA', dataKey: "fechainicio" }
+            ]
+            var colCT = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA QUE POSEE', dataKey: "cp" }
+            ]
+            var colCP = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA A LA POSTULA', dataKey: "cp" }
+            ]
+
+            var colPE = [
+                { title: 'PRECISAR: OBTENCIÓN, REVALIDACIÓN, RECATEGORIZACIÓN', dataKey: "cp" }
+            ]
+
+            //encabezado para los nombres y apellidos
+            doc.autoTable(colnom, rows, {
+                margin: { horizontal: 35, top: 95 },
+                columnStyles: {
+                    nombre: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, 110, $scope.nombres);
+            //encbezado para documento
+            doc.autoTable(coldoc, rows, {
+                margin: { horizontal: 35, top: 118 },
+                columnStyles: {
+                    inst: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, 133, $scope.nombres);
+            //encabezado de fecha de inicio 
+            doc.autoTable(colfechai, rows, {
+                margin: { horizontal: 35, top: 141 },
+                columnStyles: {
+                    fechainicio: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, 156, $scope.fechainicio);
+
+            let finalY0 = doc.autoTable.previous.finalY;
+
+            doc.autoTable([{ title: 'A. CLASE VEHICULO', dataKey: "clase" }], rows, {
+                margin: { horizontal: 35, top: finalY0 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, finalY0 + 18, "toyota yaris");
+            doc.autoTable([{ title: 'PLACA', dataKey: "clase" }], rows, {
+                margin: { horizontal: 330, top: finalY0 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(476, finalY0 + 18, "X31-234");
+            let finalY01 = doc.autoTable.previous.finalY;
+            doc.autoTable([{ title: 'B. HORA DE COMIENZO', dataKey: "clase" }], rows, {
+                margin: { horizontal: 35, top: finalY01 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, finalY01 + 18, "3:00");
+            doc.autoTable([{ title: 'HORA DE TERMINO', dataKey: "clase" }], rows, {
+                margin: { horizontal: 330, top: finalY01 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(476, finalY01 + 18, "5:00");
+            let finalY02 = doc.autoTable.previous.finalY;
+            doc.autoTable([{ title: 'C. VIA DE CIRCULACION', dataKey: "clase" }], rows, {
+                margin: { horizontal: 35, top: finalY02 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 140 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.setFontSize(8);
+            doc.text(190, finalY02 + 18, "Av. Sepulveda s/n Helipuerto Salaverry, Cuartel salaverry. Miraflores Arequipa");
+            let finalY03 = doc.autoTable.previous.finalY;
+            doc.autoTable([{ title: 'D. KILOMETRAJE DE COMIENZO', dataKey: "clase" }], rows, {
+                margin: { horizontal: 35, top: finalY03 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 170 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(210, finalY03 + 18, "0 KM");
+            doc.autoTable([{ title: 'KILOMETRAJE DE TERMINO', dataKey: "clase" }], rows, {
+                margin: { horizontal: 330, top: finalY03 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 150 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(485, finalY03 + 18, "15 KM");
+            let finalY04 = doc.autoTable.previous.finalY;
+            doc.autoTable([{ title: 'PARAMETROS DE EVALUACION', dataKey: "clase" }], rows, {
+                margin: { horizontal: 35, top: finalY04 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 340 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    halign: "center"
+                }
+            })
+            doc.autoTable([{ title: 'PUNTAJE', dataKey: "clase" }], rows, {
+                margin: { horizontal: 376, top: finalY04 + 1 },
+                columnStyles: {
+                    clase: { columnWidth: 180 }
+                },
+                styles: {
+                    fontSize: 10,
+                    halign: "center"
+                }
+            })
+
+            let finalY05 = doc.autoTable.previous.finalY;
+            doc.setFontSize(10);
+            //doc.text(35, 44, "");
+            //doc.text(35, 50, "FECHA:" + $scope.convertDate(Date.now()))
+            var col = [
+                { title: 'No', dataKey: "nro" },
+                { title: 'PARAMETRO', dataKey: "param" },
+                { title: 'a)', dataKey: "op1" },
+                { title: 'b)', dataKey: "op2" },
+                { title: 'c)', dataKey: "op3" }
+            ];
+
+            for (var key in datos) {
+                var temp = datos[key];
+                rows.push(temp);
+            }
+            doc.autoTable(col, rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 35, top: finalY05 },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap'
+                },
+                columnStyles: {
+                    nro: { columnWidth: 31 },
+                    param: { columnWidth: 310 },
+                    op1: { columnWidth: 60 },
+                    op2: { columnWidth: 60 },
+                    op3: { columnWidth: 60 }
+                }
+            });
+            let finalY06 = doc.autoTable.previous.finalY;
+            for (var key in datos1) {
+                var temp = datos1[key];
+                rows1.push(temp);
+            }
+            doc.autoTable([{ title: 'NOTA: OBSERVACION DEL ALUMNO CON RELACION', dataKey: "clase" }], rows1, {
+                margin: { horizontal: 40, top: finalY06 + 2 },
+                columnStyles: {
+                    clase: { columnWidth: 220 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    halign: "center"
+
+                }
+            })
+            doc.autoTable([{ title: 'AL APRENDIZAJE', dataKey: "clase" }], rows1, {
+                margin: { horizontal: 40, top: finalY06 + 21 },
+                columnStyles: {
+                    clase: { columnWidth: 220 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    halign: "center"
+
+                }
+            })
+            let finalY07 = doc.autoTable.previous.finalY;
+            doc.autoTable([{ title: 'OBSERVACION', dataKey: "clase" }], rows1, {
+                margin: { horizontal: 40, top: finalY07 },
+                columnStyles: {
+                    clase: { columnWidth: 110 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    halign: "center"
+
+                }
+            })
+            doc.autoTable([{ title: 'SI', dataKey: "clase" }], rows1, {
+                margin: { horizontal: 150, top: finalY07 },
+                columnStyles: {
+                    clase: { columnWidth: 30 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    halign: "center"
+
+                }
+            })
+            doc.autoTable([{ title: 'NO', dataKey: "clase" }], rows1, {
+                margin: { horizontal: 200, top: finalY07 },
+                columnStyles: {
+                    clase: { columnWidth: 30 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    halign: "center"
+
+                }
+            })
+
+            var col1 = [
+                { title: 'EVALUACION', dataKey: "evaluacion" },
+                { title: 'TIPO EXAMEN', dataKey: "tipoexamen" },
+                { title: 'RESULTADO', dataKey: "resultado" }
+            ];
+            for (var key in datos2) {
+                var temp = datos2[key];
+                rows3.push(temp);
+            }
+            doc.autoTable(col1, rows3, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 300, top: finalY06 + 2 },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap',
+                    overflowColumns: 'linebreak'
+                },
+                columnStyles: {
+                    evaluacion: { columnWidth: 80 },
+                    tipoexamen: { columnWidth: 100 },
+                    resultado: { columnWidth: 70 }
+                }
+            });
+
+            let finalY = doc.autoTable.previous.finalY;
+            //doc.text(140, finalY + 10, "TOTAL DE HORAS IMPARTIDAS: ");
+            //doc.text(368, finalY + 10, $scope.totalhoras);
+            doc.text(35, finalY + 90, "__________________________________");
+            doc.text(35, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
+            doc.text(45, finalY + 112, "       DNI:..............")
+            doc.text(420, finalY + 90, "_____________________");
+            doc.text(420, finalY + 101, " FIRMA DEL DIRECTOR");
+            doc.save('reporte3.pdf');
         }
 
 
