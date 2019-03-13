@@ -68,140 +68,22 @@ angular.module('MyApp')
         $scope.expediente = "2289";
         $scope.totalhoras = "270";
         $scope.generarpdf1 = function() {
-                var datos = $scope.datos;
-                var doc = new jsPDF('l', 'pt');
-                var rows = [];
-                img.src = '../logoinst.jpg';
-                $scope.imgToBase64(img.src, function(imagen) {
-                    doc.addImage(imagen, 'JPEG', 80, 10, 180, 60);
-                    //doc.setFont("courier", "normal");
-                    //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
-                    doc.setFont("helvetica");
-                    doc.setFontType("bold");
-                    doc.setFontSize(12);
-                    doc.text(510, 28, "EXPEDIENTE GENERAL Nº: ");
-                    doc.text(680, 28, $scope.expediente)
-                    doc.setFontSize(16);
-                    doc.text(340, 48, "REGISTRO DE ASISTENCIA A CLASES TEORICAS")
-                    doc.setFontSize(12);
-                    var colnom = [
-                        { title: 'NOMBRES Y APELLIDOS:', dataKey: "nombre" },
-                    ]
-                    var collic = [
-                        { title: 'LICENCIA EN TRAMITE :', dataKey: "lt" }
-                    ]
-                    var coltipoc = [
-                        { title: 'TIPO DE CURSO: ', dataKey: "tc" }
-                    ]
-                    doc.autoTable(colnom, rows, {
-                            margin: { horizontal: 80, top: 70 },
-                            columnStyles: {
-                                nombre: { columnWidth: 160 }
-                            },
-                            styles: {
-                                fontSize: 12,
-                                columnWidth: 'wrap',
-                            }
-                        })
-                        //doc.text(35, 75, "NOMBRES Y APELLIDOS: ");
-                    doc.text(245, 85, $scope.nombres);
-                    doc.autoTable(collic, rows, {
-                            margin: { horizontal: 80, top: 95 },
-                            columnStyles: {
-                                lt: { columnWidth: 160 }
-                            },
-                            styles: {
-                                fontSize: 12,
-                                columnWidth: 'wrap'
-                            }
-                        })
-                        //doc.text(35, 95, "LICENCIA EN TRAMITE: ");
-                    doc.text(245, 110, $scope.licTramite);
-                    doc.autoTable(coltipoc, rows, {
-                            margin: { horizontal: 400, top: 95 },
-                            columnStyles: {
-                                tc: { columnWidth: 115 }
-                            },
-                            styles: {
-                                fontSize: 12,
-                                columnWidth: 'wrap',
-                            }
-                        })
-                        //doc.text(440, 95, "TIPO DE CURSO: ");
-                    doc.text(520, 110, $scope.taller);
-                    doc.setFontSize(10);
-                    //doc.text(35, 44, "");
-                    //doc.text(35, 50, "FECHA:" + $scope.convertDate(Date.now()))
-                    var col = [
-                        { title: 'NRO', dataKey: "nro" },
-                        { title: 'FECHA', dataKey: "fecha" },
-                        { title: 'HORA DE ENTRADA', dataKey: "horaentrada" },
-                        { title: 'HORA DE SALIDA', dataKey: "horasalida" },
-                        { title: 'MINUTOS', dataKey: "minutos" }
-                    ];
-
-                    console.log(datos[0])
-                    console.log(col)
-                    for (var key in datos) {
-                        var temp = datos[key];
-                        rows.push(temp);
-                    }
-                    console.log(rows)
-                    doc.autoTable(col, rows, {
-                        tableWidth: 'wrap',
-                        margin: { horizontal: 80, top: 130 },
-                        styles: {
-                            fontSize: 10,
-                            columnWidth: 'wrap',
-                            halign: 'center'
-                        },
-                        columnStyles: {
-                            nro: { columnWidth: 60, },
-                            fecha: { columnWidth: 130 },
-                            horaentrada: { columnWidth: 170 },
-                            horasalida: { columnWidth: 170 },
-                            minutos: { columnWidth: 120 }
-                        }
-                    });
-                    let finalY = doc.autoTable.previous.finalY;
-                    doc.text(490, finalY + 10, "TOTAL HORAS: ");
-                    doc.text(663, finalY + 10, $scope.totalhoras);
-                    doc.text(120, finalY + 90, "__________________________________");
-                    doc.text(120, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
-                    doc.text(540, finalY + 90, "_____________________");
-                    doc.text(540, finalY + 101, " FIRMA DEL DIRECTOR");
-                    //window.open(doc.output('bloburl'))
-                    doc.save('reporte1.pdf');
-                })
-
-            }
-            //DATOS PARA EL REPORTE NR2
-        $scope.datos2 = [{
-            "nro": 1,
-            "fecha": $scope.convertDate(Date.now()),
-            "tipoexamen": "Conducción responsable I, II y III, Técnicas de manejo defensivo I y II, Psicología aplicada a la conducción y Acoso sexual en espacios públicos.",
-            "nota": "16",
-            "promedio": "14",
-            "resultado": "12"
-        }]
-
-        $scope.generarpdf2 = function() {
-                var datos = $scope.datos2;
-                var doc = new jsPDF('l', 'pt');
-                var rows = [];
-                img.src = '../logoinst.jpg';
-                doc.addImage(img.onload(), 'JPEG', 80, 10, 180, 60);
+            var datos = $scope.datos;
+            var doc = new jsPDF('l', 'pt');
+            var rows = [];
+            img.src = '../logoinst.jpg';
+            $scope.imgToBase64(img.src, function(imagen) {
+                doc.addImage(imagen, 'JPEG', 80, 10, 180, 60);
                 //doc.setFont("courier", "normal");
                 //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
                 doc.setFont("helvetica");
                 doc.setFontType("bold");
                 doc.setFontSize(12);
-                doc.text(480, 28, "EXPEDIENTE GENERAL Nº: ");
-                doc.text(650, 28, $scope.expediente)
+                doc.text(510, 28, "EXPEDIENTE GENERAL Nº: ");
+                doc.text(680, 28, $scope.expediente)
                 doc.setFontSize(16);
-                doc.text(340, 48, "REGISTRO DE ASISTENCIA A EXAMENES TEORICOS")
+                doc.text(340, 48, "REGISTRO DE ASISTENCIA A CLASES TEORICAS")
                 doc.setFontSize(12);
-                //doc.text(440, 45, "REGISTRO DE ASISTENCIA A CLASES TEORICAS")
                 var colnom = [
                     { title: 'NOMBRES Y APELLIDOS:', dataKey: "nombre" },
                 ]
@@ -230,7 +112,7 @@ angular.module('MyApp')
                         },
                         styles: {
                             fontSize: 12,
-                            columnWidth: 'wrap',
+                            columnWidth: 'wrap'
                         }
                     })
                     //doc.text(35, 95, "LICENCIA EN TRAMITE: ");
@@ -251,14 +133,13 @@ angular.module('MyApp')
                 //doc.text(35, 44, "");
                 //doc.text(35, 50, "FECHA:" + $scope.convertDate(Date.now()))
                 var col = [
+                    { title: 'NRO', dataKey: "nro" },
                     { title: 'FECHA', dataKey: "fecha" },
-                    { title: 'Nª', dataKey: "nro" },
-                    { title: 'TIPO DE EXAMEN', dataKey: "tipoexamen" },
-                    { title: 'NOTA', dataKey: "nota" },
-                    { title: 'PROMEDIO', dataKey: "promedio" },
-                    { title: 'RESULTADO', dataKey: "resultado" }
+                    { title: 'HORA DE ENTRADA', dataKey: "horaentrada" },
+                    { title: 'HORA DE SALIDA', dataKey: "horasalida" },
+                    { title: 'MINUTOS', dataKey: "minutos" }
                 ];
-                var rows = [];
+
                 console.log(datos[0])
                 console.log(col)
                 for (var key in datos) {
@@ -270,34 +151,158 @@ angular.module('MyApp')
                     tableWidth: 'wrap',
                     margin: { horizontal: 80, top: 130 },
                     styles: {
-                        overflow: 'linebreak',
-                        columnWidth: 'wrap',
                         fontSize: 10,
-                        cellPadding: 4,
-                        overflowColumns: 'linebreak'
+                        columnWidth: 'wrap',
+                        halign: 'center'
                     },
                     columnStyles: {
-                        fecha: { columnWidth: 70, halign: 'center' },
-                        nro: { columnWidth: 30, halign: 'center' },
-                        tipoexamen: { columnWidth: 350 },
-                        nota: { columnWidth: 80, halign: 'center' },
-                        promedio: { columnWidth: 80, halign: 'center' },
-                        resultado: { columnWidth: 80, halign: 'center' },
-
-                    },
-                    overflowColumns: ['tipoexamen']
+                        nro: { columnWidth: 60, },
+                        fecha: { columnWidth: 130 },
+                        horaentrada: { columnWidth: 170 },
+                        horasalida: { columnWidth: 170 },
+                        minutos: { columnWidth: 120 }
+                    }
                 });
                 let finalY = doc.autoTable.previous.finalY;
-                doc.text(540, finalY + 10, "PROMEDIO FINAL: ");
-                doc.text(713, finalY + 10, $scope.totalhoras);
+                doc.text(490, finalY + 10, "TOTAL HORAS: ");
+                doc.text(663, finalY + 10, $scope.totalhoras);
                 doc.text(120, finalY + 90, "__________________________________");
                 doc.text(120, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
-                doc.text(580, finalY + 90, "_____________________");
-                doc.text(580, finalY + 101, " FIRMA DEL DIRECTOR");
+                doc.text(540, finalY + 90, "_____________________");
+                doc.text(540, finalY + 101, " FIRMA DEL DIRECTOR");
                 //window.open(doc.output('bloburl'))
-                doc.save('reporte2.pdf');
+                doc.save('reporte1.pdf');
+            })
+
+        }
+
+        /**REGISTRO DE ASISTENCIA A EXAMENES TEORICOS */
+        //DATOS PARA EL REPORTE NR2
+        $scope.datos2 = [{
+            "nro": 1,
+            "fecha": $scope.convertDate(Date.now()),
+            "tipoexamen": "Conducción responsable I, II y III, Técnicas de manejo defensivo I y II, Psicología aplicada a la conducción y Acoso sexual en espacios públicos.",
+            "nota": "16",
+            "promedio": "14",
+            "resultado": "12"
+        }]
+
+
+        $scope.generarpdf2 = function() {
+            var datos = $scope.datos2;
+            var doc = new jsPDF('l', 'pt');
+            var rows = [];
+            img.src = '../logoinst.jpg';
+            doc.addImage(img.onload(), 'JPEG', 80, 10, 180, 60);
+            //doc.setFont("courier", "normal");
+            //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
+            doc.setFont("helvetica");
+            doc.setFontType("bold");
+            doc.setFontSize(12);
+            doc.text(480, 28, "EXPEDIENTE GENERAL Nº: ");
+            doc.text(650, 28, $scope.expediente)
+            doc.setFontSize(16);
+            doc.text(340, 48, "REGISTRO DE ASISTENCIA A EXAMENES TEORICOS")
+            doc.setFontSize(12);
+            //doc.text(440, 45, "REGISTRO DE ASISTENCIA A CLASES TEORICAS")
+            var colnom = [
+                { title: 'NOMBRES Y APELLIDOS:', dataKey: "nombre" },
+            ]
+            var collic = [
+                { title: 'LICENCIA EN TRAMITE :', dataKey: "lt" }
+            ]
+            var coltipoc = [
+                { title: 'TIPO DE CURSO: ', dataKey: "tc" }
+            ]
+            doc.autoTable(colnom, rows, {
+                    margin: { horizontal: 80, top: 70 },
+                    columnStyles: {
+                        nombre: { columnWidth: 160 }
+                    },
+                    styles: {
+                        fontSize: 12,
+                        columnWidth: 'wrap',
+                    }
+                })
+                //doc.text(35, 75, "NOMBRES Y APELLIDOS: ");
+            doc.text(245, 85, $scope.nombres);
+            doc.autoTable(collic, rows, {
+                    margin: { horizontal: 80, top: 95 },
+                    columnStyles: {
+                        lt: { columnWidth: 160 }
+                    },
+                    styles: {
+                        fontSize: 12,
+                        columnWidth: 'wrap',
+                    }
+                })
+                //doc.text(35, 95, "LICENCIA EN TRAMITE: ");
+            doc.text(245, 110, $scope.licTramite);
+            doc.autoTable(coltipoc, rows, {
+                    margin: { horizontal: 400, top: 95 },
+                    columnStyles: {
+                        tc: { columnWidth: 115 }
+                    },
+                    styles: {
+                        fontSize: 12,
+                        columnWidth: 'wrap',
+                    }
+                })
+                //doc.text(440, 95, "TIPO DE CURSO: ");
+            doc.text(520, 110, $scope.taller);
+            doc.setFontSize(10);
+            //doc.text(35, 44, "");
+            //doc.text(35, 50, "FECHA:" + $scope.convertDate(Date.now()))
+            var col = [
+                { title: 'FECHA', dataKey: "fecha" },
+                { title: 'Nª', dataKey: "nro" },
+                { title: 'TIPO DE EXAMEN', dataKey: "tipoexamen" },
+                { title: 'NOTA', dataKey: "nota" },
+                { title: 'PROMEDIO', dataKey: "promedio" },
+                { title: 'RESULTADO', dataKey: "resultado" }
+            ];
+            var rows = [];
+            console.log(datos[0])
+            console.log(col)
+            for (var key in datos) {
+                var temp = datos[key];
+                rows.push(temp);
             }
-            //DATOS PARA EL REPORTE NR3
+            console.log(rows)
+            doc.autoTable(col, rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 80, top: 130 },
+                styles: {
+                    overflow: 'linebreak',
+                    columnWidth: 'wrap',
+                    fontSize: 10,
+                    cellPadding: 4,
+                    overflowColumns: 'linebreak'
+                },
+                columnStyles: {
+                    fecha: { columnWidth: 70, halign: 'center' },
+                    nro: { columnWidth: 30, halign: 'center' },
+                    tipoexamen: { columnWidth: 350 },
+                    nota: { columnWidth: 80, halign: 'center' },
+                    promedio: { columnWidth: 80, halign: 'center' },
+                    resultado: { columnWidth: 80, halign: 'center' },
+
+                },
+                overflowColumns: ['tipoexamen']
+            });
+            let finalY = doc.autoTable.previous.finalY;
+            doc.text(540, finalY + 10, "PROMEDIO FINAL: ");
+            doc.text(713, finalY + 10, $scope.totalhoras);
+            doc.text(120, finalY + 90, "__________________________________");
+            doc.text(120, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
+            doc.text(580, finalY + 90, "_____________________");
+            doc.text(580, finalY + 101, " FIRMA DEL DIRECTOR");
+            //window.open(doc.output('bloburl'))
+            doc.save('reporte2.pdf');
+        }
+
+        /**FICHA INDIVIDUAL DEL ALUMNO CAPACITADO */
+        //DATOS PARA EL REPORTE NR3
         $scope.dni = "47985573";
         $scope.fechainicio = $scope.convertDate(Date.now());
         $scope.fechafin = $scope.convertDate(Date.now() + 20);
@@ -312,191 +317,193 @@ angular.module('MyApp')
         ]
 
         $scope.generarpdf3 = function() {
-                var rows = [];
-                var rows3 = [];
-                var datos = $scope.datos3;
-                var doc = new jsPDF('p', 'pt');
-                img.src = '../logoinst.jpg';
-                img2.src = '../mtc.png';
-                doc.addImage(img2.onload(), 'JPEG', 35, 10, 200, 40);
-                doc.addImage(img.onload(), 'JPEG', 360, 10, 200, 40);
-                //doc.setFont("courier", "normal");
-                //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
-                doc.setFont("helvetica");
-                doc.setFontType("bold");
-                doc.setFontSize(8);
-                doc.text(240, 65, "Nº EXPEDIENTE: ");
-                doc.text(323, 65, $scope.expediente);
-                doc.setFontSize(16);
-                doc.text(120, 80, "FICHA INDIVIDUAL DEL ALUMNO CAPACITADO")
-                doc.setFontSize(10);
-                doc.setFillColor(41, 128, 186);
-                //doc.setTextColor(255, 0, 0);
-                //doc.text(35, 400, "NOMBRES Y APELLIDOS: ");
+            var rows = [];
+            var rows3 = [];
+            var datos = $scope.datos3;
+            var doc = new jsPDF('p', 'pt');
+            img.src = '../logoinst.jpg';
+            img2.src = '../mtc.png';
+            doc.addImage(img2.onload(), 'JPEG', 35, 10, 200, 40);
+            doc.addImage(img.onload(), 'JPEG', 360, 10, 200, 40);
+            //doc.setFont("courier", "normal");
+            //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
+            doc.setFont("helvetica");
+            doc.setFontType("bold");
+            doc.setFontSize(8);
+            doc.text(240, 65, "Nº EXPEDIENTE: ");
+            doc.text(323, 65, $scope.expediente);
+            doc.setFontSize(16);
+            doc.text(120, 80, "FICHA INDIVIDUAL DEL ALUMNO CAPACITADO")
+            doc.setFontSize(10);
+            doc.setFillColor(41, 128, 186);
+            //doc.setTextColor(255, 0, 0);
+            //doc.text(35, 400, "NOMBRES Y APELLIDOS: ");
 
-                var colnom = [
-                    { title: 'NOMBRES Y APELLIDOS ', dataKey: "nombre" }
-                ]
-                var coldoc = [
-                    { title: 'DNI/CE No.                          ', datakey: "dni" }
-                ]
-                var colfechai = [
-                    { title: 'FECHA DE INICIO ', dataKey: "fechainicio" }
-                ]
-                var colfechaf = [
-                    { title: 'FECHA DE TERMINO', dataKey: "fechafin" }
-                ]
-                var colCT = [
-                    { title: 'CLASE Y CATEGORIA DE LICENCIA QUE POSEE', dataKey: "cp" }
-                ]
-                var colCP = [
-                    { title: 'CLASE Y CATEGORIA DE LICENCIA A LA POSTULA', dataKey: "cp" }
-                ]
+            var colnom = [
+                { title: 'NOMBRES Y APELLIDOS ', dataKey: "nombre" }
+            ]
+            var coldoc = [
+                { title: 'DNI/CE No.                          ', datakey: "dni" }
+            ]
+            var colfechai = [
+                { title: 'FECHA DE INICIO ', dataKey: "fechainicio" }
+            ]
+            var colfechaf = [
+                { title: 'FECHA DE TERMINO', dataKey: "fechafin" }
+            ]
+            var colCT = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA QUE POSEE', dataKey: "cp" }
+            ]
+            var colCP = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA A LA POSTULA', dataKey: "cp" }
+            ]
 
-                var colPE = [
-                    { title: 'PRECISAR: OBTENCIÓN, REVALIDACIÓN, RECATEGORIZACIÓN', dataKey: "cp" }
-                ]
+            var colPE = [
+                { title: 'PRECISAR: OBTENCIÓN, REVALIDACIÓN, RECATEGORIZACIÓN', dataKey: "cp" }
+            ]
 
-                //encabezado para los nombres y apellidos
-                doc.autoTable(colnom, rows, {
-                    margin: { horizontal: 35, top: 95 },
-                    columnStyles: {
-                        nombre: { columnWidth: 135 }
-                    },
-                    styles: {
-                        fontSize: 10,
-                        columnWidth: 'wrap'
-                    }
-                })
-                doc.text(180, 110, $scope.nombres);
-                //encbezado para documento
-                doc.autoTable(coldoc, rows, {
-                    margin: { horizontal: 35, top: 118 },
-                    columnStyles: {
-                        dni: { columnWidth: 135 }
-                    },
-                    styles: {
-                        fontSize: 10,
-                        columnWidth: 'wrap'
-                    }
-                })
-                doc.text(180, 133, $scope.dni);
-                //encabezado de fecha de inicio 
-                doc.autoTable(colfechai, rows, {
-                    margin: { horizontal: 35, top: 141 },
-                    columnStyles: {
-                        fechainicio: { columnWidth: 135 }
-                    },
-                    styles: {
-                        fontSize: 10,
-                        columnWidth: 'wrap'
-                    }
-                })
-                doc.text(180, 156, $scope.fechainicio);
-                //encabezado de fecha fin 
-                doc.autoTable(colfechaf, rows, {
-                    margin: { horizontal: 35, top: 164 },
-                    columnStyles: {
-                        fechafin: { columnWidth: 135 }
-                    },
-                    styles: {
-                        fontSize: 10,
-                        columnWidth: 'wrap'
-                    }
-                })
-                doc.text(180, 179, $scope.fechafin);
-                //#endregion
-                //ENCABEZADO DEL SEGUNDO SECTOR 
-                doc.autoTable(colCT, rows, {
-                    margin: { horizontal: 250, top: 118 },
-                    columnStyles: {
-                        cp: { columnWidth: 160 }
-                    },
-                    styles: {
-                        fontSize: 6,
-                        columnWidth: 'wrap',
-                        overflowColumns: 'linebreak'
-                    }
-                })
-                doc.text(420, 130, $scope.licTramite);
-                doc.autoTable(colCP, rows, {
-                    margin: { horizontal: 250, top: 141 },
-                    columnStyles: {
-                        cp: { columnWidth: 160 }
-                    },
-                    styles: {
-                        fontSize: 6,
-                        columnWidth: 'wrap',
-                        overflowColumns: 'linebreak'
-                    }
-                })
-                doc.text(420, 153, $scope.licTramite);
-                doc.autoTable(colPE, rows, {
-                    margin: { horizontal: 250, top: 164 },
-                    columnStyles: {
-                        cp: { columnWidth: 160 }
-                    },
-                    styles: {
-                        fontSize: 6,
-                        columnWidth: 'wrap',
-                        overflowColumns: 'linebreak'
-                    }
-                })
-                doc.text(420, 176, $scope.licTramite);
-                //#endregion
-                doc.setFontSize(14);
-                doc.text(120, 210, "RESUMEN DE LAS CLASES TEÓRICAS");
-                //doc.text(35, 95, "LICENCIA EN TRAMITE: ");
-                //doc.text(245, 110, $scope.licTramite);
-
-                //doc.text(35, 65, "NOMBRES Y APELLIDOS: ");
-                //doc.text(200, 65, $scope.nombres);
-                //doc.text(35, 75, "LICENCIA EN TRAMITE: ");
-                //doc.text(200, 75, $scope.licTramite);
-                //doc.text(270, 75, "TIPO DE CURSO: ");
-                //doc.text(360, 75, $scope.taller);
-                doc.setFontSize(10);
-                //doc.text(35, 44, "");
-                //doc.text(35, 50, "FECHA:" + $scope.convertDate(Date.now()))
-                var col = [
-                    { title: 'No', dataKey: "nro" },
-                    { title: 'NOMBRE DEL CURSO', dataKey: "nombreCurso" },
-                    { title: 'MINUTOS', dataKey: "minutos" },
-                    { title: 'FECHA CAPACITACION', dataKey: "fecha" }
-                ];
-
-                console.log(datos[0])
-                console.log(col)
-                for (var key in datos) {
-                    var temp = datos[key];
-                    rows.push(temp);
+            //encabezado para los nombres y apellidos
+            doc.autoTable(colnom, rows, {
+                margin: { horizontal: 35, top: 95 },
+                columnStyles: {
+                    nombre: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
                 }
-                console.log(rows)
-                doc.autoTable(col, rows, {
-                    tableWidth: 'wrap',
-                    margin: { horizontal: 35, top: 230 },
-                    styles: {
-                        fontSize: 10,
-                        columnWidth: 'wrap',
-                        halign: 'center'
-                    },
-                    columnStyles: {
-                        nro: { columnWidth: 30 },
-                        nombreCurso: { columnWidth: 280 },
-                        minutos: { columnWidth: 60 },
-                        fecha: { columnWidth: 125 }
-                    }
-                });
-                let finalY = doc.autoTable.previous.finalY;
-                doc.text(140, finalY + 10, "TOTAL DE HORAS IMPARTIDAS: ");
-                doc.text(368, finalY + 10, $scope.totalhoras);
-                doc.text(35, finalY + 90, "__________________________________");
-                doc.text(35, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
-                doc.text(420, finalY + 90, "_____________________");
-                doc.text(420, finalY + 101, " FIRMA DEL DIRECTOR");
-                doc.save('reporte3.pdf');
+            })
+            doc.text(180, 110, $scope.nombres);
+            //encbezado para documento
+            doc.autoTable(coldoc, rows, {
+                margin: { horizontal: 35, top: 118 },
+                columnStyles: {
+                    dni: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, 133, $scope.dni);
+            //encabezado de fecha de inicio 
+            doc.autoTable(colfechai, rows, {
+                margin: { horizontal: 35, top: 141 },
+                columnStyles: {
+                    fechainicio: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, 156, $scope.fechainicio);
+            //encabezado de fecha fin 
+            doc.autoTable(colfechaf, rows, {
+                margin: { horizontal: 35, top: 164 },
+                columnStyles: {
+                    fechafin: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+                }
+            })
+            doc.text(180, 179, $scope.fechafin);
+            //#endregion
+            //ENCABEZADO DEL SEGUNDO SECTOR 
+            doc.autoTable(colCT, rows, {
+                margin: { horizontal: 250, top: 118 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap',
+                    overflowColumns: 'linebreak'
+                }
+            })
+            doc.text(420, 130, $scope.licTramite);
+            doc.autoTable(colCP, rows, {
+                margin: { horizontal: 250, top: 141 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap',
+                    overflowColumns: 'linebreak'
+                }
+            })
+            doc.text(420, 153, $scope.licTramite);
+            doc.autoTable(colPE, rows, {
+                margin: { horizontal: 250, top: 164 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap',
+                    overflowColumns: 'linebreak'
+                }
+            })
+            doc.text(420, 176, $scope.licTramite);
+            //#endregion
+            doc.setFontSize(14);
+            doc.text(120, 210, "RESUMEN DE LAS CLASES TEÓRICAS");
+            //doc.text(35, 95, "LICENCIA EN TRAMITE: ");
+            //doc.text(245, 110, $scope.licTramite);
+
+            //doc.text(35, 65, "NOMBRES Y APELLIDOS: ");
+            //doc.text(200, 65, $scope.nombres);
+            //doc.text(35, 75, "LICENCIA EN TRAMITE: ");
+            //doc.text(200, 75, $scope.licTramite);
+            //doc.text(270, 75, "TIPO DE CURSO: ");
+            //doc.text(360, 75, $scope.taller);
+            doc.setFontSize(10);
+            //doc.text(35, 44, "");
+            //doc.text(35, 50, "FECHA:" + $scope.convertDate(Date.now()))
+            var col = [
+                { title: 'No', dataKey: "nro" },
+                { title: 'NOMBRE DEL CURSO', dataKey: "nombreCurso" },
+                { title: 'MINUTOS', dataKey: "minutos" },
+                { title: 'FECHA CAPACITACION', dataKey: "fecha" }
+            ];
+
+            console.log(datos[0])
+            console.log(col)
+            for (var key in datos) {
+                var temp = datos[key];
+                rows.push(temp);
             }
-            //DATOS PARA LA TABLA 4
+            console.log(rows)
+            doc.autoTable(col, rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 35, top: 230 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    halign: 'center'
+                },
+                columnStyles: {
+                    nro: { columnWidth: 30 },
+                    nombreCurso: { columnWidth: 280 },
+                    minutos: { columnWidth: 60 },
+                    fecha: { columnWidth: 125 }
+                }
+            });
+            let finalY = doc.autoTable.previous.finalY;
+            doc.text(140, finalY + 10, "TOTAL DE HORAS IMPARTIDAS: ");
+            doc.text(368, finalY + 10, $scope.totalhoras);
+            doc.text(35, finalY + 90, "__________________________________");
+            doc.text(35, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
+            doc.text(420, finalY + 90, "_____________________");
+            doc.text(420, finalY + 101, " FIRMA DEL DIRECTOR");
+            doc.save('reporte3.pdf');
+        }
+
+        /** FICHA DE INSCRIPCION*/
+        //DATOS PARA LA TABLA 4
         $scope.rgeneral = "123-academi"
         $scope.datosNombres = [
             { AP: "lopez", AM: "magregor", NM: "mario" }
@@ -851,6 +858,7 @@ angular.module('MyApp')
             { evaluacion: "C:R", tipoexamen: "APLICACION DE REGLAMENTO", resultado: "" }
         ];
 
+        /**EVALUACION DE PRACTICA DE MANEJO */
 
         $scope.generarpdf5 = function() {
             var rows = [];
@@ -892,7 +900,6 @@ angular.module('MyApp')
             var colCP = [
                 { title: 'CLASE Y CATEGORIA DE LICENCIA A LA POSTULA', dataKey: "cp" }
             ]
-
             var colPE = [
                 { title: 'PRECISAR: OBTENCIÓN, REVALIDACIÓN, RECATEGORIZACIÓN', dataKey: "cp" }
             ]
@@ -1153,7 +1160,7 @@ angular.module('MyApp')
                 styles: {
                     fontSize: 6,
                     columnWidth: 'wrap',
-                    overflowColumns: 'linebreak'
+                    overflow: 'linebreak'
                 },
                 columnStyles: {
                     evaluacion: { columnWidth: 80 },
@@ -1170,7 +1177,286 @@ angular.module('MyApp')
             doc.text(45, finalY + 112, "       DNI:..............")
             doc.text(420, finalY + 90, "_____________________");
             doc.text(420, finalY + 101, " FIRMA DEL DIRECTOR");
-            doc.save('reporte3.pdf');
+            doc.save('reporte5.pdf');
+        }
+
+
+
+        /**RESUMEN DE LAS CLASES TEÓRICAS Y CLASES PRÁCTICAS DE MANEJO */
+
+        $scope.datos6 = [{
+                clase: "Inicio  e ingreso al circuito, circulacion a la izquierda, circulacion  con jiba",
+                circuito: "Av. Sepulveda s/n Helipuerto Salaverry, Cuartel salaverry. Miraflores Arequipa",
+                horas: "8",
+                fecha: $scope.convertDate(Date.now())
+            },
+            {
+                clase: "Inicio  e ingreso al circuito, circulacion a la izquierda, circulacion  con jiba",
+                circuito: "Av. Sepulveda s/n Helipuerto Salaverry, Cuartel salaverry. Miraflores Arequipa",
+                horas: "8",
+                fecha: $scope.convertDate(Date.now())
+            },
+            {
+                clase: "Inicio  e ingreso al circuito, circulacion a la izquierda, circulacion  con jiba",
+                circuito: "Av. Sepulveda s/n Helipuerto Salaverry, Cuartel salaverry. Miraflores Arequipa",
+                horas: "7",
+                fecha: $scope.convertDate(Date.now())
+            },
+            {
+                clase: "Inicio  e ingreso al circuito, circulacion a la izquierda, circulacion  con jiba",
+                circuito: "Av. Sepulveda s/n Helipuerto Salaverry, Cuartel salaverry. Miraflores Arequipa",
+                horas: "2",
+                fecha: $scope.convertDate(Date.now())
+            }
+        ]
+
+        $scope.generarpdf6 = function() {
+            var rows = [];
+            var rows1 = [];
+            var datos = $scope.datos3;
+            var datos1 = $scope.datos6;
+            var doc = new jsPDF('l', 'pt');
+            img.src = '../logoinst.jpg';
+            img2.src = '../mtc.png';
+            doc.addImage(img2.onload(), 'JPEG', 35, 10, 200, 40);
+            doc.addImage(img.onload(), 'JPEG', 590, 10, 200, 40);
+            //doc.setFont("courier", "normal");
+            //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
+            doc.setFont("helvetica");
+            doc.setFontType("bold");
+            doc.setFontSize(8);
+            doc.text(390, 65, "Nº EXPEDIENTE: ");
+            doc.text(473, 65, $scope.expediente);
+            doc.setFontSize(16);
+            doc.text(270, 80, "FICHA INDIVIDUAL DEL ALUMNO CAPACITADO")
+            doc.setFontSize(10);
+            doc.setFillColor(41, 128, 186);
+            //doc.setTextColor(255, 0, 0);
+            //doc.text(35, 400, "NOMBRES Y APELLIDOS: ");
+
+            var colnom = [
+                { title: 'NOMBRES Y APELLIDOS ', dataKey: "nombre" }
+            ]
+            var coldoc = [
+                { title: 'DNI/CE No.                          ', datakey: "dni" }
+            ]
+            var colfechai = [
+                { title: 'FECHA DE INICIO ', dataKey: "fechainicio" }
+            ]
+            var colfechaf = [
+                { title: 'FECHA DE TERMINO', dataKey: "fechafin" }
+            ]
+            var colCT = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA QUE POSEE', dataKey: "cp" }
+            ]
+            var colCP = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA A LA POSTULA', dataKey: "cp" }
+            ]
+
+            var colPE = [
+                { title: 'PRECISAR: OBTENCIÓN, REVALIDACIÓN, RECATEGORIZACIÓN', dataKey: "cp" }
+            ]
+
+            //encabezado para los nombres y apellidos
+            doc.autoTable(colnom, rows, {
+                margin: { horizontal: 35, top: 95 },
+                columnStyles: {
+                    nombre: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(180, 110, $scope.nombres);
+            //encbezado para documento
+            doc.autoTable(coldoc, rows, {
+                margin: { horizontal: 35, top: 118 },
+                columnStyles: {
+                    dni: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(180, 133, $scope.dni);
+            //encabezado de fecha de inicio 
+            doc.autoTable(colfechai, rows, {
+                margin: { horizontal: 35, top: 141 },
+                columnStyles: {
+                    fechainicio: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(180, 156, $scope.fechainicio);
+            //encabezado de fecha fin 
+            doc.autoTable(colfechaf, rows, {
+                margin: { horizontal: 35, top: 164 },
+                columnStyles: {
+                    fechafin: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(180, 179, $scope.fechafin);
+            //#endregion
+            //ENCABEZADO DEL SEGUNDO SECTOR 
+            doc.autoTable(colCT, rows, {
+                margin: { horizontal: 250, top: 118 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(420, 130, $scope.licTramite);
+            doc.autoTable(colCP, rows, {
+                margin: { horizontal: 250, top: 141 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(420, 153, $scope.licTramite);
+            doc.autoTable(colPE, rows, {
+                margin: { horizontal: 250, top: 164 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 6,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(420, 176, $scope.licTramite);
+            //#endregion
+            doc.setFontSize(14);
+            //doc.text(120, 210, "RESUMEN DE LAS CLASES TEÓRICAS");
+            doc.autoTable([{ title: 'RESUMEN DE LAS CLASES TEÓRICAS', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 35, top: 210 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    halign: 'center'
+                },
+                columnStyles: {
+                    ti: { columnWidth: 760 },
+
+                }
+            })
+            let finalY0 = doc.autoTable.previous.finalY;
+            doc.autoTable([{ title: 'CLASES TEÓRICAS', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 35, top: finalY0 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    halign: 'center'
+                },
+                columnStyles: {
+                    ti: { columnWidth: 340 },
+
+                }
+            })
+            doc.autoTable([{ title: 'PRÁCTICAS DE MANEJO', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 376, top: finalY0 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    halign: 'center'
+                },
+                columnStyles: {
+                    ti: { columnWidth: 420 },
+
+                }
+            })
+
+            var col = [
+                { title: 'No', dataKey: "nro" },
+                { title: 'NOMBRE DEL CURSO', dataKey: "nombreCurso" },
+                { title: 'HORAS', dataKey: "minutos" },
+                { title: 'FECHA CAPACITACION', dataKey: "fecha" }
+            ];
+            for (var key in datos) {
+                var temp = datos[key];
+                rows.push(temp);
+            }
+            console.log(rows)
+            let finalY1 = doc.autoTable.previous.finalY;
+            doc.autoTable(col, rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 35, top: finalY1 },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    halign: 'center',
+                    overflow: 'linebreak'
+                },
+                columnStyles: {
+                    nro: { columnWidth: 30 },
+                    nombreCurso: { columnWidth: 150 },
+                    minutos: { columnWidth: 60 },
+                    fecha: { columnWidth: 100 }
+                }
+            })
+            doc.setFontSize(8);
+            let finalY2 = doc.autoTable.previous.finalY;
+            doc.text(95, finalY2 + 10, "TOTAL DE HORAS IMPARTIDAS: ");
+            doc.text(240, finalY2 + 10, $scope.totalhoras);
+            var col = [
+                { title: 'CLASES DE CIRCULACION', dataKey: "clase" },
+                { title: 'CIRCUITO/ VIAS CUANDO SE LLEVE A CABO', dataKey: "circuito" },
+                { title: 'HORAS', dataKey: "horas" },
+                { title: 'FECHA CAPACITACION', dataKey: "fecha" }
+            ];
+            for (var key in datos1) {
+                var temp = datos1[key];
+                rows1.push(temp);
+            }
+            doc.autoTable(col, rows1, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 376, top: finalY1 },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    halign: 'center',
+                    overflow: 'linebreak'
+                },
+                columnStyles: {
+                    clase: { columnWidth: 220 },
+                    circuito: { columnWidth: 100 },
+                    horas: { columnWidth: 40 },
+                    fecha: { columnWidth: 60 }
+                }
+            });
+            let finalY = doc.autoTable.previous.finalY;
+            doc.text(556, finalY + 10, "TOTAL DE HORAS IMPARTIDAS: ");
+            doc.text(711, finalY + 10, $scope.totalhoras);
+            doc.text(135, finalY + 90, "__________________________________");
+            doc.text(135, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
+            doc.text(570, finalY + 90, "_____________________");
+            doc.text(570, finalY + 101, " FIRMA DEL DIRECTOR");
+            doc.save('reporte6.pdf');
         }
 
 
