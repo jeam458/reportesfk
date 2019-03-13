@@ -1359,7 +1359,7 @@ angular.module('MyApp')
                     halign: 'center'
                 },
                 columnStyles: {
-                    ti: { columnWidth: 760 },
+                    ti: { columnWidth: 761 },
 
                 }
             })
@@ -1457,6 +1457,309 @@ angular.module('MyApp')
             doc.text(570, finalY + 90, "_____________________");
             doc.text(570, finalY + 101, " FIRMA DEL DIRECTOR");
             doc.save('reporte6.pdf');
+        }
+
+
+        /*FICHA TECNICA DE MANEJO DEL ALUMNO*/
+        $scope.datos7 = [{
+                nro: "1",
+                fecha: $scope.convertDate(Date.now()),
+                Hinicio: "8:00",
+                Hfinal: "9:00",
+                clases: "Inicio  e ingreso al circuito, circulacion a la izquierda, circulacion  con jiba, circulacion a la derecha, se detiene el vehiculo,  circulacion con crucero de peatones, circulacion en rotonda, detencion del vehiculo (5Seg) circulacion ala izquierda, circulacion en retroceso, reinicio de marcha a, circulacion a  la izquierda, examen de parqueo, circulacion y salida del circuito",
+                circuito: "Av. Sepulveda s/n Helipuerto Salaverry, Cuartel salaverry.",
+                Kinicio: "-2",
+                Ktermino: "16",
+                instructor: "mario minos pinto",
+                firmaInstructor: " ",
+                firmaAlumno: "",
+                huellaAlumno: ""
+            },
+            {
+                nro: "2",
+                fecha: $scope.convertDate(Date.now()),
+                Hinicio: "9:00",
+                Hfinal: "11:00",
+                clases: "Inicio  e ingreso al circuito, circulacion a la izquierda, circulacion  con jiba, circulacion a la derecha, se detiene el vehiculo,  circulacion con crucero de peatones, circulacion en rotonda, detencion del vehiculo (5Seg) circulacion ala izquierda, circulacion en retroceso, reinicio de marcha a, circulacion a  la izquierda, examen de parqueo, circulacion y salida del circuito",
+                circuito: "Av. Sepulveda s/n Helipuerto Salaverry, Cuartel salaverry.",
+                Kinicio: "-2",
+                Ktermino: "16",
+                instructor: "mario minos pinto",
+                firmaInstructor: " ",
+                firmaAlumno: "",
+                huellaAlumno: ""
+            }
+        ]
+
+        $scope.generarpdf7 = function() {
+            var rows = [];
+            var rows1 = [];
+            var datos = $scope.datos7;
+            var doc = new jsPDF('l', 'pt');
+            img.src = '../logoinst.jpg';
+            img2.src = '../mtc.png';
+            doc.addImage(img2.onload(), 'JPEG', 35, 10, 200, 40);
+            doc.addImage(img.onload(), 'JPEG', 590, 10, 200, 40);
+            //doc.setFont("courier", "normal");
+            //doc.addFont('ComicSansMS', 'Comic Sans', 'normal');
+            doc.setFont("helvetica");
+            doc.setFontType("bold");
+            doc.setFontSize(8);
+            doc.text(390, 65, "Nº EXPEDIENTE: ");
+            doc.text(473, 65, $scope.expediente);
+            doc.setFontSize(16);
+            doc.text(270, 80, "FICHA INDIVIDUAL DE MANEJO DEL ALUMNO")
+            doc.setFontSize(10);
+            doc.setFillColor(41, 128, 186);
+            //doc.setTextColor(255, 0, 0);
+            //doc.text(35, 400, "NOMBRES Y APELLIDOS: ");
+
+            var colnom = [
+                { title: 'NOMBRES Y APELLIDOS ', dataKey: "nombre" }
+            ]
+            var coldoc = [
+                { title: 'DNI/CE No.                          ', dataKey: "dni" }
+            ]
+            var colfechai = [
+                { title: 'FECHA DE INICIO ', dataKey: "fechainicio" }
+            ]
+            var colfechaf = [
+                { title: 'FECHA DE TERMINO', dataKey: "fechafin" }
+            ]
+            var colCT = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA QUE POSEE', dataKey: "cp" }
+            ]
+            var colCP = [
+                { title: 'CLASE Y CATEGORIA DE LICENCIA A LA POSTULA', dataKey: "cp" }
+            ]
+
+            var colPE = [
+                { title: 'PRECISAR: OBTENCIÓN, REVALIDACIÓN, RECATEGORIZACIÓN', dataKey: "cp" }
+            ]
+
+            //encabezado para los nombres y apellidos
+            doc.autoTable(colnom, rows, {
+                margin: { horizontal: 35, top: 95 },
+                columnStyles: {
+                    nombre: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            let finalY0 = doc.autoTable.previous.finalY;
+            doc.text(180, finalY0 - 5, $scope.nombres);
+            //encbezado para documento
+            doc.autoTable(coldoc, rows, {
+                margin: { horizontal: 35, top: finalY0 },
+                columnStyles: {
+                    dni: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            let finalY1 = doc.autoTable.previous.finalY;
+            doc.text(180, finalY1 - 5, $scope.dni);
+            //encabezado de fecha de inicio 
+            doc.autoTable(colfechai, rows, {
+                margin: { horizontal: 35, top: finalY1 },
+                columnStyles: {
+                    fechainicio: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            let finalY2 = doc.autoTable.previous.finalY;
+            doc.text(180, finalY2 - 5, $scope.fechainicio);
+            //encabezado de fecha fin 
+            doc.autoTable(colfechaf, rows, {
+                margin: { horizontal: 35, top: finalY2 },
+                columnStyles: {
+                    fechafin: { columnWidth: 135 }
+                },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            let finalY3 = doc.autoTable.previous.finalY;
+            doc.text(180, finalY3 - 5, $scope.fechafin);
+            //#endregion
+            doc.autoTable([{ title: 'PLACA DEL VEHICULO', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 35, top: finalY3 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+
+                },
+                columnStyles: {
+                    ti: { columnWidth: 135 },
+
+                }
+            })
+            let finalY4 = doc.autoTable.previous.finalY;
+            doc.text(180, finalY4 - 5, "ABC-123");
+            doc.autoTable([{ title: 'CAT. DEL VEHICULO', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 35, top: finalY4 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+
+                },
+                columnStyles: {
+                    ti: { columnWidth: 135 },
+
+                }
+            })
+            let finalY5 = doc.autoTable.previous.finalY;
+            doc.text(180, finalY5 - 5, "ABC-123");
+            let finalYNM = doc.autoTable.previous.finalY;
+            //ENCABEZADO DEL SEGUNDO SECTOR 
+            doc.autoTable(colCT, rows, {
+                margin: { horizontal: 250, top: finalY0 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(420, finalY1 - 5, $scope.licTramite);
+            doc.autoTable(colCP, rows, {
+                margin: { horizontal: 250, top: finalY1 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(420, finalY2 - 5, $scope.licTramite);
+            doc.autoTable(colPE, rows, {
+                margin: { horizontal: 250, top: finalY2 },
+                columnStyles: {
+                    cp: { columnWidth: 160 }
+                },
+                styles: {
+                    fontSize: 8,
+                    columnWidth: 'wrap',
+                    overflow: 'linebreak'
+                }
+            })
+            doc.text(420, finalY3 - 5, "ABC-123");
+            doc.autoTable([{ title: 'KILOMETRAJE DE INICIO', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 250, top: finalY3 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+
+                },
+                columnStyles: {
+                    ti: { columnWidth: 160 },
+
+                }
+            })
+            doc.text(420, finalY4 - 5, "ABC-123");
+            doc.autoTable([{ title: 'KILOMETRAJE DE TERMINO', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 250, top: finalY4 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap'
+
+                },
+                columnStyles: {
+                    ti: { columnWidth: 160 },
+
+                }
+            })
+            doc.text(420, finalY5 - 5, "ABC-123");
+            //#endregion
+
+            doc.autoTable([{ title: 'DATOS DE LA CAPACITACION', dataKey: "ti" }], rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 15, top: finalYNM + 5 },
+                styles: {
+                    fontSize: 10,
+                    columnWidth: 'wrap',
+                    halign: 'center'
+                },
+                columnStyles: {
+                    ti: { columnWidth: 799 },
+
+                }
+            })
+
+            var col = [
+                { title: 'No', dataKey: "nro" },
+                { title: 'FECHA', dataKey: "fecha" },
+                { title: 'HORA INICIO', dataKey: "Hinicio" },
+                { title: 'HORA DE TERMINO', dataKey: "Hfinal" },
+                { title: 'CLASES DE CIRCULACION EN VIAS REALIZADAS', dataKey: "clases" },
+                { title: 'CIRCUITO/ VIAS CUANDO SE LLEVE A CABO EM VIAS, INDICAR', dataKey: "circuito" },
+                { title: 'K. INICIO', dataKey: "Kinicio" },
+                { title: 'K. TERMINO', dataKey: "Ktermino" },
+                { title: 'APELLIDOS Y NOMBRES DEL INSTRUCTOR', dataKey: "instructor" },
+                { title: 'FIRMA DEL INSTRUCTOR', dataKey: "firmaInstructor" },
+                { title: 'FIRMA ALUMNO', dataKey: "firmaAlumno" },
+                { title: 'HUELLA ALUMNO', dataKey: "huellaAlumno" }
+            ];
+            for (var key in datos) {
+                var temp = datos[key];
+                rows.push(temp);
+            }
+            console.log(rows)
+            let finalYN = doc.autoTable.previous.finalY;
+            doc.autoTable(col, rows, {
+                tableWidth: 'wrap',
+                margin: { horizontal: 15, top: finalYN },
+                styles: {
+                    fontSize: 7,
+                    columnWidth: 'wrap',
+                    halign: 'center',
+                    overflow: 'linebreak'
+                },
+                columnStyles: {
+                    nro: { columnWidth: 25 },
+                    fecha: { columnWidth: 45 },
+                    Hinicio: { columnWidth: 45 },
+                    Hfinal: { columnWidth: 45 },
+                    clases: { columnWidth: 200 },
+                    circuito: { columnWidth: 100 },
+                    Kinicio: { columnWidth: 40 },
+                    Ktermino: { columnWidth: 40 },
+                    instructor: { columnWidth: 80 },
+                    firmaInstructor: { columnWidth: 60 },
+                    firmaAlumno: { columnWidth: 60 },
+                    huellaAlumno: { columnWidth: 60 }
+                }
+            })
+            doc.setFontSize(8);
+
+            let finalY = doc.autoTable.previous.finalY;
+            //doc.text(556, finalY + 10, "TOTAL DE HORAS IMPARTIDAS: ");
+            //doc.text(711, finalY + 10, $scope.totalhoras);
+            doc.text(135, finalY + 90, "__________________________________");
+            doc.text(135, finalY + 101, "    FIRMA DEL ALUMNO(HUELLA)");
+            doc.text(570, finalY + 90, "_____________________");
+            doc.text(570, finalY + 101, " FIRMA DEL DIRECTOR");
+            doc.save('reporte7.pdf');
         }
 
 
